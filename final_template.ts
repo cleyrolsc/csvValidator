@@ -58,7 +58,6 @@ function validateData(data: string[][]): { isValid: boolean; errors?: string[]; 
     data.forEach((row, rowIndex) => {
         const [name, age, profession, gender] = row;
 
-        // Validate Name
         if (typeof name !== 'string' || name.length > 50) {
             errors.push(`Row ${rowIndex + 1}: Name is not a string or exceeds 50 characters.`);
         } else {
@@ -71,13 +70,11 @@ function validateData(data: string[][]): { isValid: boolean; errors?: string[]; 
             }
         }
 
-        // Validate Age
         const ageNumber = parseInt(age, 10);
         if (isNaN(ageNumber) || ageNumber < 18 || ageNumber > 75) {
             errors.push(`Row ${rowIndex + 1}: Age isn't valid, it is not between 18 and 75.`);
         }
 
-        // Validate Profession
         if (typeof profession !== 'string' || profession.length > 50) {
             errors.push(`Row ${rowIndex + 1}: Profession is not a string or exceeds 50 characters.`);
         } else {
@@ -90,7 +87,6 @@ function validateData(data: string[][]): { isValid: boolean; errors?: string[]; 
             }
         }
 
-        // Validate Gender
         const genderLower = gender.toLowerCase();
         if (genderLower !== "male" && genderLower !== "female") {
             errors.push(`Row ${rowIndex + 1}: Gender is not 'male' or 'female'.`);
@@ -126,10 +122,6 @@ function parseCSV(
     let isHeader = options.hasHeaders;
 
     for (const character of csvData) {
-        const lookAhead =
-            currentPosition < csvData.length
-                ? csvData[currentPosition + 1]
-                : undefined;
 
         switch (currentState) {
             case "startDelimiter":
